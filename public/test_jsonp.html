@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>test jsonp</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $.ajax({
+        url: 'http://localhost:3000/entries/1.json',
+        success: function(json){
+          $('#entry .entry_id').text(json['id']);
+          $('#entry .title').text(json['title']);
+          $('#entry .content').text(json['content']);
+        }
+      });
+      $.ajax({
+        url: 'http://localhost:3000/entries/2.json',
+        dataType: 'jsonp',
+        success: function(json){
+          $('#entry_jsonp .entry_id').text(json['id']);
+          $('#entry_jsonp .title').text(json['title']);
+          $('#entry_jsonp .content').text(json['content']);
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+	<div id="entry">
+    <h2>JSON</h2>
+    <div class="entry_id"></div>
+    <div class="title"></div>
+    <div class="content"></div>
+  </div>
+	<div id="entry_jsonp">
+    <h2>JSONP</h2>
+    <div class="entry_id"></div>
+    <div class="title"></div>
+    <div class="content"></div>
+  </div>
+</body>
+</html>
